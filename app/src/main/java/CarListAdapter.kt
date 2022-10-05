@@ -43,9 +43,6 @@ class CarListAdapter(
             val adSizeBanner = AdSize(300, 250)
             val adSizeCct = AdSize(360, 500)
             val adSizes = arrayOf(adSizeBanner, adSizeCct)
-            var targeting = mutableMapOf<String, String>()
-            targeting["kw"] = "mobilefirst-mrec"
-            targeting["cct"] = "contentcard,gc,carsalescard"
 
             val adView = AdManagerAdView(context)
             adView.adUnitId = adUnitId
@@ -59,6 +56,8 @@ class CarListAdapter(
             // Create an ad request.
             val adRequest = AdManagerAdRequest.Builder()
             adRequest.addCustomTargeting("cct", "mrec")
+            adRequest.addCustomTargeting("env", "preprod")
+            adRequest.addCustomTargeting("kw", "mobilefirst-mrec")
 
             // Start loading the ad in the background.
             adView.loadAd(adRequest.build())
@@ -81,8 +80,9 @@ class CarListAdapter(
             val adSizeCct = AdSize(360, 500)
             val adSizes = arrayOf(adSizeBanner, adSizeCct)
             var targeting = mutableMapOf<String, String>()
-            //targeting["kw"] = "mobilefirst-mrec"
             targeting["cct"] = "contentcard,gc,carsalescard"
+            targeting["kw"] = "mobilefirst-card,mobilefirst-gc,mobilefirst-carousel"
+            targeting["env"] = "preprod"
 
             ResponsiveAdManager.loadResponsiveAd(context,
                 eventHandler = this,
